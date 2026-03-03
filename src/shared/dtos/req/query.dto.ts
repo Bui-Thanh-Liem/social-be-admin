@@ -1,0 +1,70 @@
+import z from "zod";
+import { CONSTANT_REGEX } from "../../constants/regex.constant";
+
+export const MongoOperatorSchema = z.enum([
+  "$eq",
+  "$ne",
+  "$gt",
+  "$lt",
+  "$gte",
+  "$lte",
+  "$in",
+  "$nin",
+]);
+
+const qfDtoSchema = z.object({
+  f: z.string().trim(),
+  v: z.string().trim(),
+  o: MongoOperatorSchema,
+});
+
+export const QueryDtoSchema = z.object({
+  page: z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(2).max(200).default(10),
+  q: z.string().trim().optional(),
+  f: z.string().trim().optional(),
+  pf: z
+    .string()
+    .trim()
+    .optional()
+    .refine((val) => !val || val === "on", {
+      message: "Người theo dõi không hợp lệ (on)",
+    }),
+  qf: z.preprocess((val) => {
+    if (typeof val === "string") {
+      try {
+        return JSON.parse(val);
+      } catch {
+        return undefined;
+      }
+    }
+    return val;
+  }, z.array(qfDtoSchema).optional().default([])),
+  user_id: z
+    .string()
+    .trim()
+    .regex(CONSTANT_REGEX.ID_MONGO, {
+      message: "ObjectId không hợp lệ",
+    })
+    .optional(),
+  community_id: z
+    .string()
+    .trim()
+    .regex(CONSTANT_REGEX.ID_MONGO, {
+      message: "ObjectId không hợp lệ",
+    })
+    .optional(),
+  ishl: z.enum(["0", "1"]).default("0"),
+  sd: z
+    .string()
+    .datetime({ offset: true }) // bắt buộc ISO 8601 có timezone (Z hoặc +07:00)
+    .transform((val) => new Date(val))
+    .optional(),
+  ed: z
+    .string()
+    .datetime({ offset: true })
+    .transform((val) => new Date(val))
+    .optional(),
+});
+
+export type QueryDto = z.infer<typeof QueryDtoSchema>;
