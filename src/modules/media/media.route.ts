@@ -10,7 +10,7 @@ const mediaRoute = Router();
 mediaRoute.use(authenticationMiddleware);
 
 mediaRoute.get(
-  "/media",
+  "/",
   queryValidate(QueryDtoSchema),
   asyncHandler(mediaController.getMedias),
 );
