@@ -1,15 +1,16 @@
 import { Collection, Db, ObjectId } from "mongodb";
-import { IToken } from "./token.interface";
 import { BaseSchema } from "../../shared/schemas/base.schema";
+import { IAdminToken } from "./admin-token.interface";
 
-export class TokenSchema extends BaseSchema implements IToken {
+const COLLECTION_ADMIN_TOKENS_NAME = "admin-tokens";
+export class AdminTokenSchema extends BaseSchema implements IAdminToken {
   admin_id: ObjectId;
   token: string;
   iat: Date | undefined;
   exp: Date | undefined;
   is_revoke: boolean;
 
-  constructor(token: Pick<IToken, "admin_id" | "token" | "iat" | "exp">) {
+  constructor(token: Pick<IAdminToken, "admin_id" | "token" | "iat" | "exp">) {
     super();
     this.token = token.token;
     this.is_revoke = false;
@@ -21,8 +22,10 @@ export class TokenSchema extends BaseSchema implements IToken {
   }
 }
 
-export let TokenCollection: Collection<TokenSchema>;
+export let AdminTokenCollection: Collection<AdminTokenSchema>;
 
-export function initTokenCollection(db: Db) {
-  TokenCollection = db.collection<TokenSchema>("tokens");
+export function initAdminTokenCollection(db: Db) {
+  AdminTokenCollection = db.collection<AdminTokenSchema>(
+    COLLECTION_ADMIN_TOKENS_NAME,
+  );
 }

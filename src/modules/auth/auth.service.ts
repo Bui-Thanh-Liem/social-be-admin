@@ -21,7 +21,7 @@ import { envs } from "../../configs/env.config";
 import { StringValue } from "ms";
 import { signToken } from "../../utils/jwt.util";
 import { ETokenType } from "../../shared/enums/type.enum";
-import TokenService from "../token/token.service";
+import TokenService from "../admin-token/admin-token.service";
 
 class AuthService {
   // Đăng nhập admin trả về thông tin cần setup hay verify

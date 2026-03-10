@@ -1,5 +1,5 @@
 import { Collection, Db, ObjectId } from "mongodb";
-import { BaseSchema } from "../../shared/schemas/base.schema";
+import { BaseSchema } from "../../../shared/schemas/base.schema";
 import { IMedia } from "./media.interface";
 import { EMediaStatus } from "./media.enum";
 

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import MediaService from "./media.service";
-import { IJwtPayload } from "../../shared/interfaces/jwt-payload.interface";
-import { OkResponse } from "../../core/success.response";
-import { IQuery } from "../../shared/interfaces/query.interface";
+import { IJwtPayload } from "../../../shared/interfaces/jwt-payload.interface";
+import { OkResponse } from "../../../core/success.response";
+import { IQuery } from "../../../shared/interfaces/query.interface";
 import { IMedia } from "./media.interface";
 
 class MediaController {

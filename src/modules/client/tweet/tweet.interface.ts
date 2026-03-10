@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
-import { IBase } from "../../shared/interfaces/base.interface";
 import { ETweetAudience, ETweetStatus, ETweetType } from "./tweet.enum";
-import { IMediaBare } from "../../shared/interfaces/media-base.interface";
+import { IMediaBare } from "~/shared/interfaces/media-base.interface";
+import { IBase } from "~/shared/interfaces/base.interface";
 
 export interface ICodesTweet {
   _id: string;

@@ -1,8 +1,8 @@
 import { Collection, Db } from "mongodb";
-import { BaseSchema } from "../../shared/schemas/base.schema";
+import { BaseSchema } from "../../../shared/schemas/base.schema";
 import { IUser, IUserStatus } from "./user.interface";
 import { EUserVerifyStatus, EUserStatus } from "./user.enum";
-import { IMediaBare } from "../../shared/interfaces/media-base.interface";
+import { IMediaBare } from "../../../shared/interfaces/media-base.interface";
 
 const _COLLECTION_NAME = "users";
 export class UserSchema extends BaseSchema implements IUser {

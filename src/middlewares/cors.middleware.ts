@@ -27,6 +27,7 @@ export const corsMiddleware = cors({
     "Accept",
     "Pragma",
     "x-client-id", // kiểm tra sau
+    "x-api-key",
     "Content-Type",
     "Authorization",
     "Cache-Control",

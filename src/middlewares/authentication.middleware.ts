@@ -3,7 +3,7 @@ import { envs } from "../configs/env.config";
 import { UnauthorizedError } from "../core/error.response";
 import { verifyToken } from "../utils/jwt.util";
 import adminService from "../modules/admin/admin.service";
-import tokenService from "../modules/token/token.service";
+import tokenService from "../modules/admin-token/admin-token.service";
 
 export async function authenticationMiddleware(
   req: Request,

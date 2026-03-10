@@ -1,5 +1,5 @@
-import { IBase } from "../../shared/interfaces/base.interface";
-import { IMediaBare } from "../../shared/interfaces/media-base.interface";
+import { IBase } from "../../../shared/interfaces/base.interface";
+import { IMediaBare } from "../../../shared/interfaces/media-base.interface";
 import { EUserVerifyStatus, EUserStatus } from "./user.enum";
 
 //

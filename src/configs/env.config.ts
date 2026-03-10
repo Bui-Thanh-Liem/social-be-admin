@@ -18,10 +18,14 @@ export const envs = {
   SERVER_PORT: Number(process.env.SERVER_PORT) || 9000,
   SERVER_HOST: process.env.SERVER_HOST || "Error",
 
+  //
   CLIENT_DOMAIN: process.env.CLIENT_DOMAIN || "Error",
   CLIENT_DOMAIN_ADMIN: process.env.CLIENT_DOMAIN_ADMIN || "Error",
-  SERVER_DOMAIN: process.env.SERVER_DOMAIN || "Error",
 
+  SERVER_DOMAIN: process.env.SERVER_DOMAIN || "Error",
+  SERVER_DOMAIN_ADMIN: process.env.SERVER_DOMAIN_ADMIN || "Error",
+
+  //
   PASSWORD_SALT: process.env.PASSWORD_SALT || "Error",
 
   //

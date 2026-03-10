@@ -1,10 +1,10 @@
 import { Collection, Db } from "mongodb";
-import { IAdmin, ITwoFactorBackup } from "./admin.interface";
-import { BaseSchema } from "../../shared/schemas/base.schema";
 import { IMediaBare } from "../../shared/interfaces/media-base.interface";
+import { BaseSchema } from "../../shared/schemas/base.schema";
 import { EAdminVerifyStatus } from "./admin.enum";
+import { IAdmin, ITwoFactorBackup } from "./admin.interface";
 
-const _COLLECTION_NAME = "admins";
+const COLLECTION_ADMIN_NAME = "admins";
 export class AdminSchema extends BaseSchema implements IAdmin {
   name: string;
   email: string;
@@ -39,5 +39,5 @@ export class AdminSchema extends BaseSchema implements IAdmin {
 export let AdminCollection: Collection<AdminSchema>;
 
 export function initAdminCollection(db: Db) {
-  AdminCollection = db.collection<AdminSchema>(_COLLECTION_NAME);
+  AdminCollection = db.collection<AdminSchema>(COLLECTION_ADMIN_NAME);
 }

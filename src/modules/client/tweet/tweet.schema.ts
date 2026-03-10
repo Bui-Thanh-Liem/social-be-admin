@@ -1,8 +1,8 @@
 import { Collection, Db, ObjectId } from "mongodb";
-import { BaseSchema } from "../../shared/schemas/base.schema";
 import { ICodesTweet, ITweet } from "./tweet.interface";
 import { ETweetAudience, ETweetStatus, ETweetType } from "./tweet.enum";
-import { IMediaBare } from "../../shared/interfaces/media-base.interface";
+import { IMediaBare } from "~/shared/interfaces/media-base.interface";
+import { BaseSchema } from "~/shared/schemas/base.schema";
 
 const TWEET_COLLECTION_NAME = "tweets";
 export class TweetSchema extends BaseSchema implements ITweet {

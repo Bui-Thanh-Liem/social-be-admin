@@ -1,8 +1,8 @@
-import { signedCloudfrontUrl } from "../../clouds/aws/cloudfront.aws";
-import { ResMultiDto } from "../../shared/dtos/res/res-multi.dto";
-import { IQuery } from "../../shared/interfaces/query.interface";
-import { getFilterQuery } from "../../utils/get-filter-query";
-import { getPaginationAndSafeQuery } from "../../utils/get-pagination-and-safe-query.util";
+import { signedCloudfrontUrl } from "../../../clouds/aws/cloudfront.aws";
+import { ResMultiDto } from "../../../shared/dtos/res/res-multi.dto";
+import { IQuery } from "../../../shared/interfaces/query.interface";
+import { getFilterQuery } from "../../../utils/get-filter-query";
+import { getPaginationAndSafeQuery } from "../../../utils/get-pagination-and-safe-query.util";
 import { IUser } from "../user/user.interface";
 import { IMedia } from "./media.interface";
 import { MediaCollection } from "./media.schema";

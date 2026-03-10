@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import TweetService from "./tweet.service";
-import { OkResponse } from "../../core/success.response";
-import { IQuery } from "../../shared/interfaces/query.interface";
+import { IJwtPayload } from "~/shared/interfaces/jwt-payload.interface";
 import { ITweet } from "./tweet.interface";
-import { IJwtPayload } from "../../shared/interfaces/jwt-payload.interface";
+import { IQuery } from "~/shared/interfaces/query.interface";
+import { OkResponse } from "~/core/success.response";
 
 class TweetController {
   async getTweets(req: Request, res: Response) {

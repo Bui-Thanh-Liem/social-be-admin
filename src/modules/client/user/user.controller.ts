@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { IJwtPayload } from "../../shared/interfaces/jwt-payload.interface";
+import { IJwtPayload } from "../../../shared/interfaces/jwt-payload.interface";
 import userService from "./user.service";
-import { OkResponse } from "../../core/success.response";
-import { IQuery } from "../../shared/interfaces/query.interface";
+import { OkResponse } from "../../../core/success.response";
+import { IQuery } from "../../../shared/interfaces/query.interface";
 import { IUser } from "./user.interface";
 
 class UserController {

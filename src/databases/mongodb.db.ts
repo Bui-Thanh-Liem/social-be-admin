@@ -1,15 +1,19 @@
 import { Db, MongoClient, ServerApiVersion } from "mongodb";
 import { envs } from "../configs/env.config";
 import { BadRequestError, InternalServerError } from "../core/error.response";
-import { logger } from "../utils/logger.util";
+import {
+  AdminTokenCollection,
+  initAdminTokenCollection,
+} from "../modules/admin-token/admin-token.schema";
 import {
   AdminCollection,
   initAdminCollection,
 } from "../modules/admin/admin.schema";
+import { logger } from "../utils/logger.util";
 import {
-  initTokenCollection,
-  TokenCollection,
-} from "../modules/token/token.schema";
+  BadWordCollection,
+  initBadWordCollection,
+} from "~/modules/bad-word/bad-word.schema";
 
 const _MINPOOLSIZE = 5;
 const _MAXPOOLSIZE = 50; // không bao giờ vượt, nếu hơn thì phải chờ
@@ -130,7 +134,8 @@ class Database {
     try {
       this.checkConnection();
       initAdminCollection(this.db);
-      initTokenCollection(this.db);
+      initAdminTokenCollection(this.db);
+      initBadWordCollection(this.db);
     } catch (error) {
       logger.error("Collection initialization failed:", error);
       throw error;
@@ -141,15 +146,20 @@ class Database {
     try {
       this.checkConnection();
 
-      // AdminCollection
+      // Admin Collection
       const indexAdmin = await AdminCollection.indexExists([
         "name_1",
         "email_1",
       ]);
-      const indexToken = await TokenCollection.indexExists([
+
+      // AdminToken Collection
+      const indexAdminToken = await AdminTokenCollection.indexExists([
         "admin_id_1",
         "token_1",
       ]);
+
+      // BadWord Collection
+      const indexBadWord = await BadWordCollection.indexExists(["words_1"]);
 
       // Chỉ tạo index nếu chưa tồn tại, tránh lỗi khi chạy lại nhiều lần
       if (!indexAdmin) {
@@ -166,13 +176,19 @@ class Database {
         ]);
       }
 
-      if (!indexToken) {
-        await TokenCollection.createIndexes([
+      if (!indexAdminToken) {
+        await AdminTokenCollection.createIndexes([
           {
             key: { admin_id: 1, token: 1 },
             name: "admin_id_1_token_1",
             unique: true,
           },
+        ]);
+      }
+
+      if (!indexBadWord) {
+        await BadWordCollection.createIndexes([
+          { key: { words: 1 }, name: "words_1", unique: true },
         ]);
       }
 
