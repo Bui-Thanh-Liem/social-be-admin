@@ -3,6 +3,7 @@ import axios from "axios";
 import { envs } from "~/configs/env.config";
 import FormData from "form-data";
 import fs from "fs";
+import { message } from "telegraf/filters";
 
 class BotTelegramService {
   // Token của bot Telegram, lấy từ BotFather
@@ -314,6 +315,30 @@ class BotTelegramService {
         console.error("Lỗi xử lý action Reject:", error);
       }
     });
+
+    // Khi người dùng gõ /baocao
+    this.bot.command("baocao", async (ctx) => {
+      await ctx.reply("Đang tổng hợp báo cáo doanh thu...");
+      // Gọi hàm gửi report của bạn ở đây
+    });
+
+    // Bắt bất cứ tin nhắn nào bắt đầu bằng từ "Tìm"
+    this.bot.hears(/^Tìm (.+)$/i, async (ctx) => {
+      const email = ctx.match[1]; // Lấy ra phần email sau chữ "Tìm "
+      await ctx.reply(`🔍 Đang truy vấn Database cho email: ${email}`);
+      // Logic tìm trong MongoDB...
+    });
+
+    // Bắt các tin nhắn chào hỏi
+    this.bot.hears(["hello", "hi", "chào"], (ctx) => {
+      ctx.reply("Chào Admin! Chúc bạn một ngày làm việc hiệu quả.");
+    });
+
+    this.bot.on(message("text"), (ctx) =>
+      ctx.reply(
+        "Bot không hiểu lệnh này, vui lòng gõ /help hoặc sử dụng nút bấm.",
+      ),
+    );
   }
 }
 
