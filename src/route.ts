@@ -8,12 +8,14 @@ import mediaRoute from "./modules/client/media/media.route";
 import userViolationsRoute from "./modules/client/user-violations/user-violations.route";
 import userRoute from "./modules/client/user/user.route";
 import tweetRoute from "./modules/client/tweet/tweet.route";
+import badWordRoute from "./modules/bad-word/bad-word.route";
 
 const rootRoute = Router();
 
 // Mount các route con
 rootRoute.use("/auth", authRoute);
 rootRoute.use("/admin", adminRoute);
+rootRoute.use("/bad-word", badWordRoute);
 rootRoute.use("/user", userRoute);
 rootRoute.use("/tweet", tweetRoute);
 rootRoute.use("/community", communityRoute);

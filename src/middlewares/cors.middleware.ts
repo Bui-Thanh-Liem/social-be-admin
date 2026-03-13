@@ -3,6 +3,7 @@ import { envs } from "../configs/env.config";
 
 // Danh sách các origin được phép
 export const allowedOrigins = [envs.CLIENT_DOMAIN, envs.CLIENT_DOMAIN_ADMIN];
+console.log("Allowed Origins:", allowedOrigins);
 
 export const corsMiddleware = cors({
   origin: (origin, callback) => {

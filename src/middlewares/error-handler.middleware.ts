@@ -1,6 +1,7 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
 import { ErrorResponse } from "../core/error.response";
+import TelegramService from "~/helpers/bot-telegram";
 
 export const errorHandler: ErrorRequestHandler = async (
   err: any,
@@ -27,23 +28,6 @@ export const errorHandler: ErrorRequestHandler = async (
 
     //
     message = formattedErrors.map((e: any) => e.message).join(" - ");
-
-    //
-    if (!isDev) {
-      // await DiscordLog.sendLogError('🛑 Zod Validation Error:', {
-      //   clientIp: req.ip,
-      //   clientId: req.headers['x-client-id'] as string,
-      //   request: {
-      //     method: req.method,
-      //     url: req.originalUrl,
-      //     body: req.body,
-      //     params: req.params,
-      //     query: req.query
-      //   },
-      //   message: message,
-      //   statusCode: statusCode
-      // })
-    }
   }
 
   // Log đầy đủ để dev dễ debug
@@ -74,18 +58,9 @@ export const errorHandler: ErrorRequestHandler = async (
   };
   console.log("resError :::", resError);
   if (resError.statusCode !== 401 && !isDev) {
-    // await DiscordLog.sendLogError(message, {
-    //   clientIp: req.ip,
-    //   clientId: req.headers['x-client-id'] as string,
-    //   request: {
-    //     method: req.method,
-    //     url: req.originalUrl
-    //   },
-    //   message: resError.message,
-    //   statusCode: resError.statusCode,
-    //   stack: resError.stack,
-    //   ...resError.otherFields
-    // })
+    TelegramService.sendTelegramAlert({
+      message: `<pre>${resError}</pre>`,
+    });
   }
 
   // Trả response ra client

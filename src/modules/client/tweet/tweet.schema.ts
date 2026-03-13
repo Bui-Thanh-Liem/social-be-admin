@@ -4,7 +4,7 @@ import { ETweetAudience, ETweetStatus, ETweetType } from "./tweet.enum";
 import { IMediaBare } from "~/shared/interfaces/media-base.interface";
 import { BaseSchema } from "~/shared/schemas/base.schema";
 
-const TWEET_COLLECTION_NAME = "tweets";
+const COLLECTION_TWEET_NAME = "tweets";
 export class TweetSchema extends BaseSchema implements ITweet {
   user_id: ObjectId;
   type: ETweetType;
@@ -49,5 +49,5 @@ export class TweetSchema extends BaseSchema implements ITweet {
 export let TweetCollection: Collection<TweetSchema>;
 
 export function initTweetCollection(db: Db) {
-  TweetCollection = db.collection<TweetSchema>(TWEET_COLLECTION_NAME);
+  TweetCollection = db.collection<TweetSchema>(COLLECTION_TWEET_NAME);
 }

@@ -1,3 +1,4 @@
+import botTelegramService from "~/helpers/bot-telegram";
 import { signedCloudfrontUrl } from "../../../clouds/aws/cloudfront.aws";
 import { ResMultiDto } from "../../../shared/dtos/res/res-multi.dto";
 import { IQuery } from "../../../shared/interfaces/query.interface";
@@ -6,6 +7,7 @@ import { getPaginationAndSafeQuery } from "../../../utils/get-pagination-and-saf
 import { IUser } from "../user/user.interface";
 import { IMedia } from "./media.interface";
 import { MediaCollection } from "./media.schema";
+import { envs } from "~/configs/env.config";
 
 class MediaService {
   async getMedias({
@@ -51,6 +53,11 @@ class MediaService {
       ]).toArray(),
       MediaCollection.countDocuments(),
     ]);
+
+    await botTelegramService.sendDailyReport({
+      data: [12, 19, 3, 5],
+      labels: ["T2", "T3", "T4", "T5"],
+    });
 
     return {
       total,

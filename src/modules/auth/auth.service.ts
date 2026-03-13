@@ -22,6 +22,7 @@ import { StringValue } from "ms";
 import { signToken } from "../../utils/jwt.util";
 import { ETokenType } from "../../shared/enums/type.enum";
 import TokenService from "../admin-token/admin-token.service";
+import TelegramService from "~/helpers/bot-telegram";
 
 class AuthService {
   // Đăng nhập admin trả về thông tin cần setup hay verify
@@ -202,7 +203,7 @@ class AuthService {
     // 1. Nếu 2FA không được kích hoạt thì không cần xác thực nữa
     const admin = await AdminCollection.findOne(
       { _id: new ObjectId(admin_id) },
-      { projection: { two_factor_secret: 1, two_factor_enabled: 1 } },
+      { projection: { two_factor_secret: 1, two_factor_enabled: 1, email: 1 } },
     );
     if (!admin || !admin.two_factor_enabled || !admin.two_factor_secret) {
       throw new NotFoundError("Admin không tồn tại hoặc chưa thiết lập 2FA.");
@@ -248,9 +249,13 @@ class AuthService {
     }
 
     // Xóa session login sau khi kích hoạt thành công
-    await CacheService.del(keySessionLogin);
-    const keyCacheAdminToken = createKeyAdminAT(token_);
-    await CacheService.del(keyCacheAdminToken);
+    await Promise.all([
+      CacheService.del(keySessionLogin),
+      CacheService.del(createKeyAdminAT(token_)),
+      TelegramService.sendTelegramAlert({
+        message: `<b>Admin ${admin.email} đã đăng nhập thành công vào lúc ${new Date().toLocaleString()}.</b>`,
+      }),
+    ]);
 
     return {
       token: token_,

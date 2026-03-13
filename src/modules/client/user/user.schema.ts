@@ -4,7 +4,7 @@ import { IUser, IUserStatus } from "./user.interface";
 import { EUserVerifyStatus, EUserStatus } from "./user.enum";
 import { IMediaBare } from "../../../shared/interfaces/media-base.interface";
 
-const _COLLECTION_NAME = "users";
+export const COLLECTION_USER_NAME = "users";
 export class UserSchema extends BaseSchema implements IUser {
   name: string;
   email: string;
@@ -43,5 +43,5 @@ export class UserSchema extends BaseSchema implements IUser {
 export let UserCollection: Collection<UserSchema>;
 
 export function initUserCollection(db: Db) {
-  UserCollection = db.collection<UserSchema>(_COLLECTION_NAME);
+  UserCollection = db.collection<UserSchema>(COLLECTION_USER_NAME);
 }

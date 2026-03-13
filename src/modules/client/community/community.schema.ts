@@ -19,12 +19,12 @@ import {
 import { slug } from "~/utils/slug.util";
 
 export const CONSTANT_INVITE_EXPIRES = 3; // số ngày lời mời có hiệu lực, mặc định là 3 ngày
-const COMMUNITY_COLLECTION_NAME = "communities";
-const COMMUNITY_MENTOR_COLLECTION_NAME = "community-mentors";
-const COMMUNITY_MEMBER_COLLECTION_NAME = "community-members";
-const COMMUNITY_PIN_COLLECTION_NAME = "community-pins";
-const COMMUNITY_INVITATION_COLLECTION_NAME = "community-invitations";
-const COMMUNITY_ACTIVITY_COLLECTION_NAME = "community-activities";
+const COLLECTION_COMMUNITY_NAME = "communities";
+const COLLECTION_COMMUNITY_MENTOR_NAME = "community-mentors";
+const COLLECTION_COMMUNITY_MEMBER_NAME = "community-members";
+const COLLECTION_COMMUNITY_PIN_NAME = "community-pins";
+const COLLECTION_COMMUNITY_INVITATION_NAME = "community-invitations";
+const COLLECTION_COMMUNITY_ACTIVITY_NAME = "community-activities";
 
 // Cộng đồngđồng
 export class CommunitySchema extends BaseSchema implements ICommunity {
@@ -164,36 +164,36 @@ export let CommunityActivityCollection: Collection<CommunityActivitySchema>;
 
 export function initCommunityCollection(db: Db) {
   CommunityCollection = db.collection<CommunitySchema>(
-    COMMUNITY_COLLECTION_NAME,
+    COLLECTION_COMMUNITY_NAME,
   );
 }
 
 export function initCommunityMentorCollection(db: Db) {
   CommunityMentorCollection = db.collection<CommunityMentorSchema>(
-    COMMUNITY_MENTOR_COLLECTION_NAME,
+    COLLECTION_COMMUNITY_MENTOR_NAME,
   );
 }
 
 export function initCommunityMemberCollection(db: Db) {
   CommunityMemberCollection = db.collection<CommunityMemberSchema>(
-    COMMUNITY_MEMBER_COLLECTION_NAME,
+    COLLECTION_COMMUNITY_MEMBER_NAME,
   );
 }
 
 export function initCommunityPinCollection(db: Db) {
   CommunityPinCollection = db.collection<CommunityPinSchema>(
-    COMMUNITY_PIN_COLLECTION_NAME,
+    COLLECTION_COMMUNITY_PIN_NAME,
   );
 }
 
 export function initCommunityInvitationCollection(db: Db) {
   CommunityInvitationCollection = db.collection<CommunityInvitationSchema>(
-    COMMUNITY_INVITATION_COLLECTION_NAME,
+    COLLECTION_COMMUNITY_INVITATION_NAME,
   );
 }
 
 export function initCommunityActivityCollection(db: Db) {
   CommunityActivityCollection = db.collection<CommunityActivitySchema>(
-    COMMUNITY_ACTIVITY_COLLECTION_NAME,
+    COLLECTION_COMMUNITY_ACTIVITY_NAME,
   );
 }

@@ -8,6 +8,7 @@ import {
   UserViolationSchema,
   UserViolationsCollection,
 } from "./user-violations.schema";
+import { COLLECTION_USER_NAME } from "../user/user.schema";
 
 class UserViolationsService {
   async create(payload: CreateUserViolationsDto) {

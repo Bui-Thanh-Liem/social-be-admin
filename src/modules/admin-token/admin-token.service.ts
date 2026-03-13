@@ -17,16 +17,11 @@ class TokenService {
     token,
     admin_id,
   }: Pick<IAdminToken, "admin_id" | "token" | "iat" | "exp">) {
-    const filter = { admin_id: new ObjectId(admin_id) };
+    const filter = { admin_id: admin_id };
     const result = await AdminTokenCollection.findOneAndUpdate(
       filter,
       {
-        $set: new AdminTokenSchema({
-          exp,
-          iat,
-          token,
-          admin_id: new ObjectId(admin_id),
-        }),
+        $set: { exp, iat, token, admin_id } as AdminTokenSchema,
       },
       { upsert: true, returnDocument: "before" },
     );

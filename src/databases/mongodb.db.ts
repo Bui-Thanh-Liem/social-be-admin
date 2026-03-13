@@ -14,6 +14,21 @@ import {
   BadWordCollection,
   initBadWordCollection,
 } from "~/modules/bad-word/bad-word.schema";
+import { initUserCollection } from "~/modules/client/user/user.schema";
+import {
+  initTweetCollection,
+  TweetCollection,
+} from "~/modules/client/tweet/tweet.schema";
+import { initMediaCollection } from "~/modules/client/media/media.schema";
+import {
+  initCommunityActivityCollection,
+  initCommunityCollection,
+  initCommunityInvitationCollection,
+  initCommunityMemberCollection,
+  initCommunityMentorCollection,
+  initCommunityPinCollection,
+} from "~/modules/client/community/community.schema";
+import { initUserViolationsCollection } from "~/modules/client/user-violations/user-violations.schema";
 
 const _MINPOOLSIZE = 5;
 const _MAXPOOLSIZE = 50; // không bao giờ vượt, nếu hơn thì phải chờ
@@ -136,6 +151,16 @@ class Database {
       initAdminCollection(this.db);
       initAdminTokenCollection(this.db);
       initBadWordCollection(this.db);
+      initUserCollection(this.db);
+      initTweetCollection(this.db);
+      initMediaCollection(this.db);
+      initCommunityCollection(this.db);
+      initCommunityMentorCollection(this.db);
+      initCommunityMemberCollection(this.db);
+      initCommunityPinCollection(this.db);
+      initCommunityInvitationCollection(this.db);
+      initCommunityActivityCollection(this.db);
+      initUserViolationsCollection(this.db);
     } catch (error) {
       logger.error("Collection initialization failed:", error);
       throw error;

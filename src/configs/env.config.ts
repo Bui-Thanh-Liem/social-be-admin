@@ -54,4 +54,8 @@ export const envs = {
 
   AWS_S3_BUCKET_NAME: process.env.AWS_S3_BUCKET_NAME || "Error",
   AWS_PRESIGNED_URL_EXPIRES_IN: process.env.AWS_PRESIGNED_URL_EXPIRES_IN || "0",
+
+  TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || "Error",
+  TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID || "Error",
+  TELEGRAM_CHAT_GROUP_ID: process.env.TELEGRAM_CHAT_GROUP_ID || "Error",
 };
